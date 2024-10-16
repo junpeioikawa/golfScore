@@ -2,7 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+# 2. PyMySQLを利用できるように以下を追記する
+import pymysql
 
+pymysql.install_as_MySQLdb()
 
 def main():
     """Run administrative tasks."""
