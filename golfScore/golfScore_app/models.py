@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -25,7 +26,8 @@ class CourseMaster(models.Model):
     course_city = models.CharField(max_length=100, null=False, blank=False)  # 市町村区
     course_address = models.CharField(max_length=255, null=False, blank=False)  # 住所
     course_phone_number = models.CharField(max_length=11, null=False, blank=False)  # 電話番号
-
+    create_at = models.DateTimeField(blank=False, null=False)  # 登録日
+    update_at = models.DateTimeField(blank=False, null=False)  # 更新日
 
     def __str__(self):
         return self.name
