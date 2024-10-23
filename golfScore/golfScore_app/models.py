@@ -184,3 +184,5 @@ class Round(models.Model):
 
 
 # 2024/10/23 oikawa_end
+
+# Git テスト2
