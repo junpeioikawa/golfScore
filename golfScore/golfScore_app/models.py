@@ -29,5 +29,3 @@ class CourseMaster(models.Model):
     create_at = models.DateTimeField(blank=False, null=False)  # 登録日
     update_at = models.DateTimeField(blank=False, null=False)  # 更新日
 
-    def __str__(self):
-        return self.name
