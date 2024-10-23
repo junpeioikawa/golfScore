@@ -4,14 +4,18 @@ from django.utils import timezone
 
 
 # Create your models here.
-class Player(models.Model):
+class User(models.Model):
+    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ユーザID
     name = models.CharField(max_length=100)
+    create_at = models.DateTimeField(blank=False, null=False)  # 登録日
+    update_at = models.DateTimeField(blank=False, null=False)  # 更新日
+
 
     def __str__(self):
         return self.name
 
 class Score(models.Model):
-    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    player = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     score = models.IntegerField()
 
@@ -79,3 +83,104 @@ class CorseMaster(models.Model):
     handicap_9 = models.IntegerField(max_length=2, null=False, blank=False)
     
 # 2024/10/23 hayashida end
+
+# 2024/10/23 oikawa_str
+class Round(models.Model):
+    round_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ラウンドID
+    course_id = models.ForeignKey(CourseMaster,on_delete=models.PROTECT)  # コースID
+    play_date = models.DateTimeField(blank=False, null=False)  # プレイ日
+    weather = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False) # 天気
+    wind =  models.CharField(verbose_name="choice", max_length=255,blank=False, null=False) # 風
+    first_round = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False)# 前半
+    second_round = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False)# 後半
+    ex_round = models.CharField(verbose_name="choice", max_length=255, blank=True, null=True) # 追加ラウンド
+    teeing_area = models.CharField(verbose_name="choice", max_length=255, blank=True, null=True) # ティー
+    green = models.CharField(verbose_name="choice", max_length=255, blank=True, null=True) # グリーン
+    # ホール1-27
+    hole_1 = models.IntegerField(blank=False, null=False)
+    hole_2 = models.IntegerField(blank=False, null=False)
+    hole_3 = models.IntegerField(blank=False, null=False)
+    hole_4 = models.IntegerField(blank=False, null=False)
+    hole_5 = models.IntegerField(blank=False, null=False)
+    hole_6 = models.IntegerField(blank=False, null=False)
+    hole_7 = models.IntegerField(blank=False, null=False)
+    hole_8 = models.IntegerField(blank=False, null=False)
+    hole_9 = models.IntegerField(blank=False, null=False)
+    hole_10 = models.IntegerField(blank=False, null=False)
+    hole_11 = models.IntegerField(blank=False, null=False)
+    hole_12 = models.IntegerField(blank=False, null=False)
+    hole_13 = models.IntegerField(blank=False, null=False)
+    hole_14 = models.IntegerField(blank=False, null=False)
+    hole_15 = models.IntegerField(blank=False, null=False)
+    hole_16 = models.IntegerField(blank=False, null=False)
+    hole_17 = models.IntegerField(blank=False, null=False)
+    hole_18 = models.IntegerField(blank=False, null=False)
+    hole_19 = models.IntegerField(blank=False, null=False)
+    hole_20 = models.IntegerField(blank=False, null=False)
+    hole_21 = models.IntegerField(blank=False, null=False)
+    hole_22 = models.IntegerField(blank=False, null=False)
+    hole_23 = models.IntegerField(blank=False, null=False)
+    hole_24 = models.IntegerField(blank=False, null=False)
+    hole_25 = models.IntegerField(blank=False, null=False)
+    hole_26 = models.IntegerField(blank=False, null=False)
+    hole_27 = models.IntegerField(blank=False, null=False)
+    # ハンディキャップ1-27
+    handicap_1 = models.IntegerField(blank=False, null=False)
+    handicap_2 = models.IntegerField(blank=False, null=False)
+    handicap_3 = models.IntegerField(blank=False, null=False)
+    handicap_4 = models.IntegerField(blank=False, null=False)
+    handicap_5 = models.IntegerField(blank=False, null=False)
+    handicap_6 = models.IntegerField(blank=False, null=False)
+    handicap_7 = models.IntegerField(blank=False, null=False)
+    handicap_8 = models.IntegerField(blank=False, null=False)
+    handicap_9 = models.IntegerField(blank=False, null=False)
+    handicap_10 = models.IntegerField(blank=False, null=False)
+    handicap_11 = models.IntegerField(blank=False, null=False)
+    handicap_12 = models.IntegerField(blank=False, null=False)
+    handicap_13 = models.IntegerField(blank=False, null=False)
+    handicap_14 = models.IntegerField(blank=False, null=False)
+    handicap_15 = models.IntegerField(blank=False, null=False)
+    handicap_16 = models.IntegerField(blank=False, null=False)
+    handicap_17 = models.IntegerField(blank=False, null=False)
+    handicap_18 = models.IntegerField(blank=False, null=False)
+    handicap_19 = models.IntegerField(blank=False, null=False)
+    handicap_20 = models.IntegerField(blank=False, null=False)
+    handicap_21 = models.IntegerField(blank=False, null=False)
+    handicap_22 = models.IntegerField(blank=False, null=False)
+    handicap_23 = models.IntegerField(blank=False, null=False)
+    handicap_24 = models.IntegerField(blank=False, null=False)
+    handicap_25 = models.IntegerField(blank=False, null=False)
+    handicap_26 = models.IntegerField(blank=False, null=False)
+    handicap_27 = models.IntegerField(blank=False, null=False)
+    # パー1-27
+    par_1 = models.IntegerField(blank=False, null=False)
+    par_2 = models.IntegerField(blank=False, null=False)
+    par_3 = models.IntegerField(blank=False, null=False)
+    par_4 = models.IntegerField(blank=False, null=False)
+    par_5 = models.IntegerField(blank=False, null=False)
+    par_6 = models.IntegerField(blank=False, null=False)
+    par_7 = models.IntegerField(blank=False, null=False)
+    par_8 = models.IntegerField(blank=False, null=False)
+    par_9 = models.IntegerField(blank=False, null=False)
+    par_10 = models.IntegerField(blank=False, null=False)
+    par_11 = models.IntegerField(blank=False, null=False)
+    par_12 = models.IntegerField(blank=False, null=False)
+    par_13 = models.IntegerField(blank=False, null=False)
+    par_14 = models.IntegerField(blank=False, null=False)
+    par_15 = models.IntegerField(blank=False, null=False)
+    par_16 = models.IntegerField(blank=False, null=False)
+    par_17 = models.IntegerField(blank=False, null=False)
+    par_18 = models.IntegerField(blank=False, null=False)
+    par_19 = models.IntegerField(blank=False, null=False)
+    par_20 = models.IntegerField(blank=False, null=False)
+    par_21 = models.IntegerField(blank=False, null=False)
+    par_22 = models.IntegerField(blank=False, null=False)
+    par_23 = models.IntegerField(blank=False, null=False)
+    par_24 = models.IntegerField(blank=False, null=False)
+    par_25 = models.IntegerField(blank=False, null=False)
+    par_26 = models.IntegerField(blank=False, null=False)
+    par_27 = models.IntegerField(blank=False, null=False)
+
+
+
+# 2024/10/23 oikawa_end
