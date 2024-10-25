@@ -50,7 +50,7 @@ class GolfHouseMaster(models.Model):
     create_at = models.DateTimeField(blank=False, null=False)  # 登録日
     update_at = models.DateTimeField(blank=False, null=False)  # 更新日
     
-class CorseMaster(models.Model):
+class CourseMaster(models.Model):
     house_id = models.ForeignKey(GolfHouseMaster, on_delete=models.CASCADE)
     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # コースID
     course_name = models.CharField(max_length=255, null=False, blank=False)  # コース名
