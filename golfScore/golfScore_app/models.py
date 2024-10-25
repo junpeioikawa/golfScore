@@ -51,6 +51,9 @@ class GolfHouseMaster(models.Model):
     create_at = models.DateTimeField(default=timezone.now)  # 登録日
     update_at = models.DateTimeField(auto_now=True)  # 更新日
     
+    def __str__(self):
+        return self.house_name
+    
 class CourseMaster(models.Model):
     house_id = models.ForeignKey(GolfHouseMaster, on_delete=models.CASCADE)
     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # コースID
@@ -84,6 +87,9 @@ class CourseMaster(models.Model):
     handicap_9 = models.IntegerField( null=False, blank=False)
     create_at = models.DateTimeField(default=timezone.now)  # 登録日
     update_at = models.DateTimeField(auto_now=True)  # 更新日
+    
+    def __str__(self):
+        return f"{self.house_id.house_name} - {self.course_name}"
     
 # 2024/10/23 hayashida end
 
