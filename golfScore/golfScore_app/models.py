@@ -41,7 +41,7 @@ class Score(models.Model):
 
 # 2024/10/23 hayashida start
 class GolfHouseMaster(models.Model):
-    house_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, verbose_name='ゴルフ場ID')  # ゴルフ場ID
+    house_id = models.AutoField(primary_key=True, verbose_name='ゴルフ場ID')  # ゴルフ場ID
     house_name = models.CharField(max_length=255, null=False, blank=False, verbose_name='ゴルフ場名')  # ゴルフ場名
     house_zipcode = models.CharField(max_length=8, null=False, blank=False, verbose_name='郵便番号')  # 郵便番号
     house_prefecture = models.CharField(max_length=40, null=False, blank=False, verbose_name='都道府県')  # 都道府県
@@ -56,7 +56,7 @@ class GolfHouseMaster(models.Model):
     
 class CourseMaster(models.Model):
     house_id = models.ForeignKey(GolfHouseMaster, on_delete=models.CASCADE)
-    course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # コースID
+    course_id = models.AutoField(primary_key=True)  # コースID
     course_name = models.CharField(max_length=255, null=False, blank=False)  # コース名
     hole_number_1 = models.IntegerField( null=False, blank=False)
     hole_number_2 = models.IntegerField( null=False, blank=False)
@@ -93,10 +93,28 @@ class CourseMaster(models.Model):
     
 # 2024/10/23 hayashida end
 
+class TeeingAreaMaster(models.Model):
+    teeing_area_id = models.AutoField(primary_key=True)
+    house_id = models.ForeignKey(GolfHouseMaster, on_delete=models.CASCADE)
+    course_id = models.ForeignKey(CourseMaster, on_delete=models.CASCADE)
+    teeing_area_name = models.CharField(max_length=255, null=False, blank=False, verbose_name='ティーイングエリア名')
+    yard_1 = models.IntegerField( blank=True, null=True)
+    yard_2 = models.IntegerField( blank=True, null=True)
+    yard_3 = models.IntegerField( blank=True, null=True)
+    yard_4 = models.IntegerField( blank=True, null=True)
+    yard_5 = models.IntegerField( blank=True, null=True)
+    yard_6 = models.IntegerField( blank=True, null=True)
+    yard_7 = models.IntegerField( blank=True, null=True)
+    yard_8 = models.IntegerField( blank=True, null=True)
+    yard_9 = models.IntegerField( blank=True, null=True)
+    create_at = models.DateTimeField(default=timezone.now)  # 登録日
+    update_at = models.DateTimeField(auto_now=True)  # 更新日
+    
+
 # 2024/10/23 oikawa_str
 class Round(models.Model):
     round_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ラウンドID
-    course_id = models.ForeignKey(CourseMaster,on_delete=models.PROTECT)  # コースID
+    house_id = models.ForeignKey(GolfHouseMaster,on_delete=models.PROTECT)  # ハウスID
     play_date = models.DateTimeField(blank=False, null=False)  # プレイ日
     weather = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False) # 天気
     wind =  models.CharField(verbose_name="choice", max_length=255,blank=False, null=False) # 風
