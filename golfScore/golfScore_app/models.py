@@ -110,6 +110,8 @@ class TeeingAreaMaster(models.Model):
     create_at = models.DateTimeField(default=timezone.now)  # 登録日
     update_at = models.DateTimeField(auto_now=True)  # 更新日
     
+    def __str__(self):
+        return self.teeing_area_name
 
 # 2024/10/23 oikawa_str
 class Round(models.Model):
