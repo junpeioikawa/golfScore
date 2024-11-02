@@ -1,119 +1,8 @@
 import uuid
 from django.db import models
 from django.utils import timezone
+from golfScore_app.models.golfHouseMaster import GolfHouseMaster
 
-
-# Create your models here.
-class Player(models.Model):
-    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ユーザID
-    name = models.CharField(max_length=100)
-    create_at = models.DateTimeField(default=timezone.now)  # 登録日
-    update_at = models.DateTimeField(auto_now=True)  # 更新日
-
-
-    def __str__(self):
-        return self.name
-
-class Score(models.Model):
-    player = models.ForeignKey(Player, on_delete=models.CASCADE)
-    date = models.DateField()
-    score = models.IntegerField()
-    
-
-    def __str__(self):
-        return f"{self.player.name} - {self.score} ({self.date})"
-
-# class CourseMaster(models.Model):
-#     course_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # コースID
-#     course_name = models.CharField(max_length=255, null=True, blank=True)  # ゴルフ場名
-#     course_zipcode = models.CharField(max_length=8, null=True, blank=False)  # 郵便番号
-#     course_prefecture = models.CharField(max_length=40, null=False, blank=False)  # 都道府県
-#     course_city = models.CharField(max_length=100, null=False, blank=False)  # 市町村区
-#     course_address = models.CharField(max_length=255, null=False, blank=False)  # 住所
-#     course_phone_number = models.CharField(max_length=11, null=False, blank=False)  # 電話番号
-#     create_at = models.DateTimeField(alse)  # 登録日
-#     update_at = models.DateTimeField(blank=False, null=False)  # 更新日
-
-
-
-
-
-
-# 2024/10/23 hayashida start
-class GolfHouseMaster(models.Model):
-    house_id = models.AutoField(primary_key=True, verbose_name='ゴルフ場ID')  # ゴルフ場ID
-    house_name = models.CharField(max_length=255, null=False, blank=False, verbose_name='ゴルフ場名')  # ゴルフ場名
-    house_zipcode = models.CharField(max_length=8, null=False, blank=False, verbose_name='郵便番号')  # 郵便番号
-    house_prefecture = models.CharField(max_length=40, null=False, blank=False, verbose_name='都道府県')  # 都道府県
-    house_city = models.CharField(max_length=100, null=False, blank=False, verbose_name='市町村区')  # 市町村区
-    house_address = models.CharField(max_length=255, null=False, blank=False, verbose_name='住所')  # 住所
-    house_phone_number = models.CharField(max_length=11, null=False, blank=False, verbose_name='電話番号')  # 電話番号
-    create_at = models.DateTimeField(default=timezone.now)  # 登録日
-    update_at = models.DateTimeField(auto_now=True)  # 更新日
-    
-    def __str__(self):
-        return self.house_name
-    
-class CourseMaster(models.Model):
-    house_id = models.ForeignKey(GolfHouseMaster, on_delete=models.CASCADE)
-    course_id = models.AutoField(primary_key=True)  # コースID
-    course_name = models.CharField(max_length=255, null=False, blank=False)  # コース名
-    hole_number_1 = models.IntegerField( null=False, blank=False)
-    hole_number_2 = models.IntegerField( null=False, blank=False)
-    hole_number_3 = models.IntegerField( null=False, blank=False)
-    hole_number_4 = models.IntegerField( null=False, blank=False)
-    hole_number_5 = models.IntegerField( null=False, blank=False)
-    hole_number_6 = models.IntegerField( null=False, blank=False)
-    hole_number_7 = models.IntegerField( null=False, blank=False)
-    hole_number_8 = models.IntegerField( null=False, blank=False)
-    hole_number_9 = models.IntegerField( null=False, blank=False)
-    par_1 = models.IntegerField( null=False, blank=False)
-    par_2 = models.IntegerField( null=False, blank=False)
-    par_3 = models.IntegerField( null=False, blank=False)
-    par_4 = models.IntegerField( null=False, blank=False)
-    par_5 = models.IntegerField( null=False, blank=False)
-    par_6 = models.IntegerField( null=False, blank=False)
-    par_7 = models.IntegerField( null=False, blank=False)
-    par_8 = models.IntegerField( null=False, blank=False)
-    par_9 = models.IntegerField( null=False, blank=False)
-    handicap_1 = models.IntegerField( null=False, blank=False)
-    handicap_2 = models.IntegerField( null=False, blank=False)
-    handicap_3 = models.IntegerField( null=False, blank=False)
-    handicap_4 = models.IntegerField( null=False, blank=False)
-    handicap_5 = models.IntegerField( null=False, blank=False)
-    handicap_6 = models.IntegerField( null=False, blank=False)
-    handicap_7 = models.IntegerField( null=False, blank=False)
-    handicap_8 = models.IntegerField( null=False, blank=False)
-    handicap_9 = models.IntegerField( null=False, blank=False)
-    create_at = models.DateTimeField(default=timezone.now)  # 登録日
-    update_at = models.DateTimeField(auto_now=True)  # 更新日
-    
-    def __str__(self):
-        return f"{self.house_id.house_name} - {self.course_name}"
-    
-# 2024/10/23 hayashida end
-
-class TeeingAreaMaster(models.Model):
-    teeing_area_id = models.AutoField(primary_key=True)
-    house_id = models.ForeignKey(GolfHouseMaster, on_delete=models.CASCADE)
-    course_id = models.ForeignKey(CourseMaster, on_delete=models.CASCADE)
-    teeing_area_name = models.CharField(max_length=255, null=False, blank=False, verbose_name='ティーイングエリア名')
-    yard_1 = models.IntegerField( blank=True, null=True)
-    yard_2 = models.IntegerField( blank=True, null=True)
-    yard_3 = models.IntegerField( blank=True, null=True)
-    yard_4 = models.IntegerField( blank=True, null=True)
-    yard_5 = models.IntegerField( blank=True, null=True)
-    yard_6 = models.IntegerField( blank=True, null=True)
-    yard_7 = models.IntegerField( blank=True, null=True)
-    yard_8 = models.IntegerField( blank=True, null=True)
-    yard_9 = models.IntegerField( blank=True, null=True)
-    create_at = models.DateTimeField(default=timezone.now)  # 登録日
-    update_at = models.DateTimeField(auto_now=True)  # 更新日
-    
-    def __str__(self):
-        return self.teeing_area_name
-
-# 2024/10/23 oikawa_str
 class Round(models.Model):
     round_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ラウンドID
     house_id = models.ForeignKey(GolfHouseMaster,on_delete=models.PROTECT)  # ハウスID
@@ -212,8 +101,3 @@ class Round(models.Model):
     create_at = models.DateTimeField(default=timezone.now)  # 登録日
     update_at = models.DateTimeField(auto_now=True)  # 更新日
 
-
-
-# 2024/10/23 oikawa_end
-
-# Git テスト2
