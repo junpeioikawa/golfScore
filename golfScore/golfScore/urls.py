@@ -21,7 +21,7 @@ from golfScore_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('round', views.round_views.helloworld, name='helloworld'),
+    path('round', views.round_views.helloworld.as_view(), name='helloworld'),
     path('round/test', views.round_views.test, name='test'),
     path('user', views.user_views.helloworld, name='helloworld'),
     path('user/test', views.user_views.test, name='test')
