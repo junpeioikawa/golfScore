@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LoginViewテスト</title>
+  </head>
+  <body>
+    <h1>login_signup.html</h1>
+    
+    <form method="post">
+      {% csrf_token %} {{ form }}
+      <button type="submit">ログイン</button>
+    </form>
+    
+  </body>
+</html>
