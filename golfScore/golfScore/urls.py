@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from golfScore_app import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.helloworld, name='helloworld'),
-    path('test', views.test, name='test')
+    path('round', views.round_views.helloworld, name='helloworld'),
+    path('round/test', views.round_views.test, name='test'),
+    path('user', views.user_views.helloworld, name='helloworld'),
+    path('user/test', views.user_views.test, name='test')
 ]
 
 
