@@ -22,6 +22,8 @@ from golfScore_app import views
 urlpatterns = [
     path('round', views.round_views.list_golfHouse_View, name='listGolfHouse'),
     path('round/<str:pk>', views.round_views.input_round_View,  name='inputRound'),
+    path('round2', views.round_views.GolfHouseListView.as_view(), name='listGolfHouse2'),
+    
     
     # hayashida start
     path('login/', views.user_views.UserLoginView.as_view(), name='login'),
