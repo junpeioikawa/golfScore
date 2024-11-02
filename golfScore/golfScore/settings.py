@@ -137,5 +137,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ログイン系
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'helloworld'
+LOGIN_REDIRECT_URL = 'listGolfHouse'
 LOGOUT_REDIRECT_URL = 'login'
