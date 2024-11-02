@@ -9,7 +9,7 @@ from golfScore_app.models import GolfHouseMaster
 def test(request):
     return HttpResponse('round test')
 
-class helloworld(ListView):
+class GolfHouseListView(ListView):
     model = GolfHouseMaster
     template_name = 'round_pages/list_golfhouse.html'
     
