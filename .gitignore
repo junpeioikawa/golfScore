@@ -1,2 +1,5 @@
+*.log
+*.pyc
+**/__pycache__/**
 jp_readme.txt
 ib_readme.txt
