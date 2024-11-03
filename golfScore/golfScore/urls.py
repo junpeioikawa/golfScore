@@ -20,6 +20,8 @@ from golfScore_app import views
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    
     path('round', views.round_views.GolfHouseListView.as_view(), name='listGolfHouse'),
     # path('round/<str:pk>', views.round_views.RoundCreateView.as_view(),  name='inputRound'),
     
