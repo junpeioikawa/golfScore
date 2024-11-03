@@ -8,32 +8,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">DEF</th>
-                        <th scope="col">コース名</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for golfHouseData in golfHouseList%}
-                        <tr>
-                            <td>{{golfHouseData.house_id}}</td>
-                            <td>{{golfHouseData.house_name}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">LISTVIEWS</th>
+                        <th scope="col">選択</th>
                         <th scope="col">コース名</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for golfHouseData in object_list%}
-                        <tr>
-                            <td>{{golfHouseData.house_id}}</td>
-                            <td>{{golfHouseData.house_name}}</td>
+                    <tr>
+                        <td><a href="/round/{{golfHouseData.house_id}}/">{{golfHouseData.house_id}}</td>
+                        <td>{{golfHouseData.house_name}}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

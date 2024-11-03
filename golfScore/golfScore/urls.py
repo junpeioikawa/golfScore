@@ -20,9 +20,8 @@ from golfScore_app import views
 
 
 urlpatterns = [
-    path('round', views.round_views.list_golfHouse_View, name='listGolfHouse'),
-    path('round/<str:pk>', views.round_views.input_round_View,  name='inputRound'),
-    path('round2', views.round_views.GolfHouseListView.as_view(), name='listGolfHouse2'),
+    path('round', views.round_views.GolfHouseListView.as_view(), name='listGolfHouse'),
+    # path('round/<str:pk>', views.round_views.RoundCreateView.as_view(),  name='inputRound'),
     
     
     # hayashida start
