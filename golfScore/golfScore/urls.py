@@ -23,11 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('round', views.round_views.GolfHouseListView.as_view(), name='listGolfHouse'),
-    path('round/<str:pk>', views.round_views.RoundCreateView.as_view(),  name='inputRound'),
+    path('round/<str:pk>/', views.round_views.RoundCreateView.as_view(),  name='inputRound'),
     
     
     # hayashida start
-    path('login/', views.user_views.UserLoginView.as_view(), name='login'),
+    path('', views.user_views.UserLoginView.as_view(), name='login'),
     # hayashida end
     
 ]
