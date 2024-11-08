@@ -1,12 +1,11 @@
 from django.db.models.query import QuerySet
 from django.utils import dateformat,timezone
 from django.utils.timezone import localtime
-
 from django.shortcuts import get_object_or_404, render
 from django.http.response import HttpResponse
-from django.views.generic import ListView,CreateView
+from django.views.generic import ListView,CreateView,TemplateView
 from golfScore_app.models import GolfHouseMaster,Round
-
+from golfScore_app.forms import RoundCreateForm
 # # Create your views here.
 # def helloworld(request):
 #     return HttpResponse('round Hello World!')
@@ -27,11 +26,11 @@ class GolfHouseListView(ListView):
             return disp_data
 
 
-# class RoundCreateView(CreateView):
-#     model = Round
-#     template_name = 'round_pages/list_golfhouse.html'
-#     def get(self, request):
-#         if "query_param" in request.GET:
-#             # query_paramが指定されている場合の処理
-#         param_value = request.GET.get("query_param")
-#         else:
+class RoundCreateView(CreateView):
+    form_class = RoundCreateForm
+    model = Round
+    template_name = 'round_pages/input_round.html'
+    
+    def get(self, request, *args, **kwargs):
+        self.kwargs['pk'] = self.request.user.pk
+        return super().get(request, *args, **kwargs)
