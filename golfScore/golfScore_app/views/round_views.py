@@ -4,7 +4,8 @@ from django.utils.timezone import localtime
 from django.shortcuts import get_object_or_404, render
 from django.http.response import HttpResponse
 import datetime
-from django.views.generic import ListView,CreateView,TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView,CreateView,FormView
 from golfScore_app.models import GolfHouseMaster,Round
 from golfScore_app.forms import RoundCreateForm
 # # Create your views here.
@@ -29,13 +30,10 @@ class GolfHouseListView(ListView):
             return disp_data
 
 
-class RoundCreateView(CreateView):
-    form_class = RoundCreateForm
-    model = Round
+class RoundCreateView(FormView):
     template_name = 'round_pages/input_round.html'
-    def get_context_data(self, **kwargs):
-        
-
+    success_url = reverse_lazy('listGolfHouse')
+    form_class = RoundCreateForm
     # def get_form_kwargs(self, *args, **kwargs):
     #     kwgs = super().get_form_kwargs(*args, **kwargs)
     #     kwgs["house_id"] = self.request.GET.get("pk")
