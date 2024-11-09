@@ -6,14 +6,14 @@ from golfScore_app.models.golfHouseMaster import GolfHouseMaster
 class Round(models.Model):
     round_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ラウンドID
     house_id = models.ForeignKey(GolfHouseMaster,on_delete=models.PROTECT)  # ハウスID
-    play_date = models.DateTimeField(blank=False, null=False)  # プレイ日
-    weather = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False) # 天気
-    wind =  models.CharField(verbose_name="choice", max_length=255,blank=False, null=False) # 風
-    first_round = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False)# 前半
-    second_round = models.CharField(verbose_name="choice", max_length=255,blank=False, null=False)# 後半
-    ex_round = models.CharField(verbose_name="choice", max_length=255, blank=True, null=True) # 追加ラウンド
-    teeing_area = models.CharField(verbose_name="choice", max_length=255, blank=True, null=True) # ティー
-    green = models.CharField(verbose_name="choice", max_length=255, blank=True, null=True) # グリーン
+    play_date = models.DateField(blank=False, null=False)  # プレイ日
+    weather = models.CharField( max_length=255,blank=False, null=False) # 天気
+    wind =  models.CharField( max_length=255,blank=False, null=False) # 風
+    first_round = models.CharField( max_length=255,blank=False, null=False)# 前半
+    second_round = models.CharField( max_length=255,blank=False, null=False)# 後半
+    ex_round = models.CharField( max_length=255, blank=True, null=True) # 追加ラウンド
+    teeing_area = models.CharField( max_length=255, blank=True, null=True) # ティー
+    green = models.CharField( max_length=255, blank=True, null=True) # グリーン
     # ホール1-27
     hole_1 = models.IntegerField(blank=True, null=True)
     hole_2 = models.IntegerField(blank=True, null=True)

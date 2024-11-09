@@ -3,6 +3,7 @@ from django.utils import dateformat,timezone
 from django.utils.timezone import localtime
 from django.shortcuts import get_object_or_404, render
 from django.http.response import HttpResponse
+import datetime
 from django.views.generic import ListView,CreateView,TemplateView
 from golfScore_app.models import GolfHouseMaster,Round
 from golfScore_app.forms import RoundCreateForm
@@ -11,6 +12,8 @@ from golfScore_app.forms import RoundCreateForm
 #     return HttpResponse('round Hello World!')
 # def test(request):
 #     return HttpResponse('round test')
+
+today = datetime.datetime.today().date()
 
 class GolfHouseListView(ListView):
     model = GolfHouseMaster
@@ -30,7 +33,10 @@ class RoundCreateView(CreateView):
     form_class = RoundCreateForm
     model = Round
     template_name = 'round_pages/input_round.html'
-    
-    def get(self, request, *args, **kwargs):
-        self.kwargs['pk'] = self.request.user.pk
-        return super().get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        
+
+    # def get_form_kwargs(self, *args, **kwargs):
+    #     kwgs = super().get_form_kwargs(*args, **kwargs)
+    #     kwgs["house_id"] = self.request.GET.get("pk")
+    #     return kwgs
