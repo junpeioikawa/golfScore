@@ -35,6 +35,10 @@ class RoundCreateView(FormView):
     success_url = reverse_lazy('listGolfHouse')
     form_class = RoundCreateForm
     # def get_form_kwargs(self, *args, **kwargs):
-    #     kwgs = super().get_form_kwargs(*args, **kwargs)
-    #     kwgs["house_id"] = self.request.GET.get("pk")
-    #     return kwgs
+    #     context = super(RoundCreateView, self).get_context_data(**kwargs)
+    #     context["house_id"] = self.request.GET.get("pk")
+    #     return context
+    def get_form_kwargs(self):
+        kwargs = super(RoundCreateView,self).get_form_kwargs()
+        kwargs['house_id'] =self.kwargs['pk'] #service_idはパラメータ
+        return kwargs

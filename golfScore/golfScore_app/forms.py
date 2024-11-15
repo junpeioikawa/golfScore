@@ -27,19 +27,34 @@ class RoundCreateForm(forms.Form):
             ('5','強'),
         )
         )
-    first_round = second_round = ex_round = forms.ModelChoiceField(
-        queryset=CourseMaster.objects.filter(house_id = 2),
+    first_round =forms.ChoiceField(
         widget=forms.widgets.Select
     )
-    teeing_area = forms.ModelChoiceField(
-        queryset=TeeingAreaMaster.objects.filter(house_id = 2),
+    second_round = forms.ChoiceField(
+        widget=forms.widgets.Select
+    )
+    ex_round = forms.ChoiceField(
+        widget=forms.widgets.Select
+    )
+    teeing_area = forms.ChoiceField(
         widget=forms.widgets.Select
     )
 
-    # def __init__(self, *args, **kwargs):
-    #     house_id = kwargs.pop('house_id')
-    #     super(RoundCreateForm, self).__init__(*args, **kwargs)
-    #     cours_data = CourseMaster.objects.filter(house_id=house_id)
-    #     self.fields['first_round'].queryset = cours_data
-    #     self.fields['second_round'].queryset = cours_data
-    #     self.fields['ex_round'].queryset = cours_data
+    def __init__(self, *args, **kwargs):
+        house_id = kwargs.pop('house_id')
+        # super(RoundCreateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        
+        cours_list = CourseMaster.objects.filter(house_id = house_id)
+        cours_choices = [(cours_data.course_id, cours_data.course_name) for cours_data in cours_list]
+        self.fields['first_round'].choices = cours_choices
+        self.fields['second_round'].choices = cours_choices
+        self.fields['ex_round'].choices = cours_choices
+        teeing_list = TeeingAreaMaster.objects.filter(house_id = house_id)
+        teein_choices = [(teeing_data.teeing_area_id, teeing_data.teeing_area_name) for teeing_data in teeing_list]
+        self.fields['teeing_area'].choices = teein_choices
+
+
+
+        # self.fields['second_round'].queryset = cours_data
+        # self.fields['ex_round'].queryset = cours_data
