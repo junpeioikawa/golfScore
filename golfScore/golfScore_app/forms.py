@@ -34,7 +34,7 @@ class RoundCreateForm(forms.Form):
         widget=forms.widgets.Select
     )
     ex_round = forms.ChoiceField(
-        widget=forms.widgets.Select
+        widget=forms.widgets.Select, initial="None"
     )
     teeing_area = forms.ChoiceField(
         widget=forms.widgets.Select
@@ -49,7 +49,7 @@ class RoundCreateForm(forms.Form):
         cours_choices = [(cours_data.course_id, cours_data.course_name) for cours_data in cours_list]
         self.fields['first_round'].choices = cours_choices
         self.fields['second_round'].choices = cours_choices
-        self.fields['ex_round'].choices = cours_choices
+        self.fields['ex_round'].choices = [("0", "")] + cours_choices
         teeing_list = TeeingAreaMaster.objects.filter(house_id = house_id)
         teein_choices = [(teeing_data.teeing_area_id, teeing_data.teeing_area_name) for teeing_data in teeing_list]
         self.fields['teeing_area'].choices = teein_choices
