@@ -42,3 +42,6 @@ class RoundCreateView(FormView):
         kwargs = super(RoundCreateView,self).get_form_kwargs()
         kwargs['house_id'] =self.kwargs['pk'] #service_idはパラメータ
         return kwargs
+
+    def post(self, request, *args, **kwargs):
+         return super().post(request, *args, **kwargs)
