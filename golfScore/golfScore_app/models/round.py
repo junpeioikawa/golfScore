@@ -2,7 +2,7 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from golfScore_app.models.golfHouseMaster import GolfHouseMaster
-
+#golf_score_app
 class Round(models.Model):
     round_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)  # ラウンドID
     house_id = models.ForeignKey(GolfHouseMaster,on_delete=models.PROTECT)  # ハウスID
