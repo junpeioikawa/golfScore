@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from golfScore_app import views
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +27,8 @@ urlpatterns = [
     
     
     # hayashida start
-    path('', views.user_views.UserLoginView.as_view(), name='login'),
+    path('', views.user_views.UserLoginView.as_view(), name='home'),
+    path('signup/', views.SignupView.as_view(), name='signup'),
     # hayashida end
     
 ]

@@ -1,9 +1,0 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
-{% block main %}
-    <h1>アクセスしているURL：{{ request.get_full_path }}</h1>
-
-    <form method="post">
-      {% csrf_token %} {{ form }}
-      <button type="submit">ログイン</button>
-    </form>
-{% endblock %}

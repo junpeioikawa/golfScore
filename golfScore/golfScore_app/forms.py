@@ -2,7 +2,8 @@ from django.core.exceptions import ValidationError
 from django import forms
 from datetime import date
 from .models import Round,CourseMaster,TeeingAreaMaster
-
+from django.contrib.auth.forms import UserCreationForm
+from .models.user import CustomUser
 
 
 
@@ -77,3 +78,79 @@ class RoundCreateForm(forms.Form):
         
         # self.fields['second_round'].queryset = cours_data
         # self.fields['ex_round'].queryset = cours_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class SignupForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = ('username', 'email')
+        

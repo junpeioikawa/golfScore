@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホーム</title>
+</head>
+<body>
+    <h1>ホーム</h1>
+    
+    {% if user.is_authenticated %}
+        ようこそ{{user.get_username}}さん
+        {% comment %} <p><a href="{% url 'logout' %}"></a></p> {% endcomment %}
+    {% else %}
+        <p><a href="{% url 'login' }">ログイン</a></p>
+    {% endif %}
+        
+</body>
+</html>

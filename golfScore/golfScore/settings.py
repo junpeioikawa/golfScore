@@ -136,6 +136,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ログイン系
+AUTH_USER_MODEL = 'golfScore_app.CustomUser'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'listGolfHouse'
 LOGOUT_REDIRECT_URL = 'login'

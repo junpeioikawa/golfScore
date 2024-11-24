@@ -5,3 +5,4 @@ from .courseMaster import CourseMaster
 from .teeingAreaMaster import TeeingAreaMaster
 from .teeingAreaYardMaster import TeeingAreaYardMaster
 from .round import Round
+from .user import CustomUser
